@@ -68,6 +68,9 @@
 [ext_resource type="Texture2D" uid="uid://b771rxse6n114" path="res://art/characters/elf/walk/0_Dark_Elves_Walking_022.png" id="65_abkgc"]
 [ext_resource type="Texture2D" uid="uid://c2r31n6lj0pks" path="res://art/characters/elf/walk/0_Dark_Elves_Walking_023.png" id="66_j28mg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_punm5"]
+size = Vector2(42, 56)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ctry3"]
 animations = [{
 "frames": [{
@@ -299,11 +302,13 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_punm5"]
-size = Vector2(42, 56)
-
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite")]
 script = ExtResource("1_os5ah")
+player_sprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -28)
+shape = SubResource("RectangleShape2D_punm5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -30)
@@ -313,7 +318,3 @@ animation = &"idle"
 autoplay = "idle"
 frame = 8
 frame_progress = 0.42852
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -28)
-shape = SubResource("RectangleShape2D_punm5")
