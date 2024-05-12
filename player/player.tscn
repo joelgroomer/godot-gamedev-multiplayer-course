@@ -302,7 +302,6 @@ animations = [{
 size = Vector2(42, 56)
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(0.5, 0.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -30)
