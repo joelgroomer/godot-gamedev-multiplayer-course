@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 @export var ip_line_edit: LineEdit
 @export var status_label: Label
