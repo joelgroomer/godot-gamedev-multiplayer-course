@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://naim6jwvxko8"]
 
-[ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://art/platforms/Platformer_spritesheet.png" id="1_auv0v"]
-[ext_resource type="PackedScene" uid="uid://du1y6t7b61lna" path="res://player/player.tscn" id="2_u1k4f"]
-[ext_resource type="Texture2D" uid="uid://bja0wl8tcw71c" path="res://art/backgrounds/background_01.png" id="3_bse25"]
-[ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://art/backgrounds/background_02.png" id="4_arxrn"]
+[ext_resource type="PackedScene" uid="uid://du1y6t7b61lna" path="res://player/player.tscn" id="1_najoe"]
+[ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://art/platforms/Platformer_spritesheet.png" id="2_d1m5r"]
+[ext_resource type="Texture2D" uid="uid://bja0wl8tcw71c" path="res://art/backgrounds/background_01.png" id="3_3sfhy"]
+[ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://art/backgrounds/background_02.png" id="4_w2nb1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yyhww"]
-texture = ExtResource("1_auv0v")
+texture = ExtResource("2_d1m5r")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -69,7 +69,7 @@ sources/0 = SubResource("TileSetAtlasSource_yyhww")
 
 [node name="Level_01" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("2_u1k4f")]
+[node name="Player" parent="." instance=ExtResource("1_najoe")]
 position = Vector2(66, 128)
 
 [node name="----- Environment -----" type="Node" parent="."]
@@ -87,7 +87,7 @@ motion_scale = Vector2(0.25, 1)
 motion_mirroring = Vector2(1334, 2.08165e-12)
 
 [node name="BackgroundTrees" type="Sprite2D" parent="----- Environment -----/ParallaxBackground/ParallaxTrees"]
-texture = ExtResource("3_bse25")
+texture = ExtResource("3_3sfhy")
 centered = false
 
 [node name="ParallaxHills" type="ParallaxLayer" parent="----- Environment -----/ParallaxBackground"]
@@ -95,7 +95,7 @@ motion_scale = Vector2(0.5, 1)
 motion_mirroring = Vector2(1334, 2.08165e-12)
 
 [node name="BackgroundHills" type="Sprite2D" parent="----- Environment -----/ParallaxBackground/ParallaxHills"]
-texture = ExtResource("4_arxrn")
+texture = ExtResource("4_w2nb1")
 centered = false
 
 [node name="----- Players -----" type="Node" parent="."]
