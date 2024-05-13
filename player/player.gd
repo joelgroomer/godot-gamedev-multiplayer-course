@@ -10,16 +10,30 @@ extends CharacterBody2D
 
 @onready var initial_sprite_scale = player_sprite.scale
 
+var owner_id = 1
 var jump_count = 0
 var camera_instance
 
-func _ready():
+func _enter_tree():
+	owner_id = name.to_int()
+	set_multiplayer_authority(owner_id)
+	if owner_id != multiplayer.get_unique_id():
+		return
+		
 	set_up_camera()
 
 func _process(_delta):
+	if multiplayer.multiplayer_peer == null:
+		return
+	if owner_id != multiplayer.get_unique_id():
+		return
+		
 	update_camera_pos()
 
 func _physics_process(_delta):
+	if owner_id != multiplayer.get_unique_id():
+		return
+	
 	var h_input = (
 		Input.get_action_strength("move_right")
 		- Input.get_action_strength("move_left")
