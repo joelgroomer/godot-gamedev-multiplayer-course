@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://naim6jwvxko8"]
+[gd_scene load_steps=11 format=3 uid="uid://naim6jwvxko8"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_3b6ng"]
 [ext_resource type="PackedScene" uid="uid://du1y6t7b61lna" path="res://player/player.tscn" id="1_najoe"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://art/backgrounds/background_02.png" id="4_w2nb1"]
 [ext_resource type="PackedScene" uid="uid://ddt811gjie62e" path="res://interactables/pressure_plate/pressure_plate.tscn" id="6_0al7l"]
 [ext_resource type="PackedScene" uid="uid://bibdn5db2udgp" path="res://interactables/door/door.tscn" id="7_le7ps"]
+[ext_resource type="PackedScene" uid="uid://crkm2wlksc6vr" path="res://interactables/chest/chest.tscn" id="8_713pk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yyhww"]
 texture = ExtResource("2_d1m5r")
@@ -109,6 +110,10 @@ position = Vector2(47, 126)
 
 [node name="Door" parent="----- Interactables -----" instance=ExtResource("7_le7ps")]
 position = Vector2(-198, 130)
+
+[node name="Chest" parent="----- Interactables -----" instance=ExtResource("8_713pk")]
+position = Vector2(-407, 130)
+scale = Vector2(-1, 1)
 
 [node name="----- Players -----" type="Node" parent="."]
 

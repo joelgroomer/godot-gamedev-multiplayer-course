@@ -15,8 +15,11 @@ func _on_area_2d_body_entered(_body):
 	set_plate_state()
 
 func _on_area_2d_body_exited(_body):
+	if multiplayer.multiplayer_peer == null:
+		return
 	if not multiplayer.is_server():
 		return
+	
 	bodies_on_plate -= 1
 	set_plate_state()
 
