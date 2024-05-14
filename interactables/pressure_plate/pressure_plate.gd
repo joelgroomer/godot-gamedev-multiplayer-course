@@ -1,5 +1,7 @@
 extends Node2D
 
+signal toggle(state)
+
 @export var is_down = false
 @export var plate_up: Sprite2D
 @export var plate_down: Sprite2D
@@ -20,6 +22,7 @@ func _on_area_2d_body_exited(_body):
 
 func set_plate_state():
 	is_down = bodies_on_plate >= 1
+	toggle.emit(is_down)
 	set_plate_sprite()
 
 func set_plate_sprite():
