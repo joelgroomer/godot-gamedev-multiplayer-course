@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://naim6jwvxko8"]
+[gd_scene load_steps=9 format=3 uid="uid://naim6jwvxko8"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_3b6ng"]
 [ext_resource type="PackedScene" uid="uid://du1y6t7b61lna" path="res://player/player.tscn" id="1_najoe"]
 [ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://art/platforms/Platformer_spritesheet.png" id="2_d1m5r"]
 [ext_resource type="Texture2D" uid="uid://bja0wl8tcw71c" path="res://art/backgrounds/background_01.png" id="3_3sfhy"]
 [ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://art/backgrounds/background_02.png" id="4_w2nb1"]
+[ext_resource type="PackedScene" uid="uid://ddt811gjie62e" path="res://interactables/pressure_plate/pressure_plate.tscn" id="6_0al7l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yyhww"]
 texture = ExtResource("2_d1m5r")
@@ -99,6 +100,11 @@ motion_mirroring = Vector2(1334, 2.08165e-12)
 [node name="BackgroundHills" type="Sprite2D" parent="----- Environment -----/ParallaxBackground/ParallaxHills"]
 texture = ExtResource("4_w2nb1")
 centered = false
+
+[node name="----- Interactables -----" type="Node" parent="."]
+
+[node name="PressurePlate" parent="----- Interactables -----" instance=ExtResource("6_0al7l")]
+position = Vector2(47, 126)
 
 [node name="----- Players -----" type="Node" parent="."]
 
