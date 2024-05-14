@@ -79,21 +79,23 @@ func face_movement_direction(h_input):
 
 func handle_movement_state():
 	# Decide State
-	if Input.is_action_just_pressed("jump"):
-		state = PlayerState.JUMP_STARTED
-	elif is_on_floor() and is_zero_approx(velocity.x):
-		state = PlayerState.IDLE
-	elif is_on_floor() and not is_zero_approx(velocity.x):
-		state = PlayerState.WALKING
-	else:
-		state = PlayerState.JUMPING
-	
-	if velocity.y > 0.0 and not is_on_floor():
+	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
-			state = PlayerState.DOUBLE_JUMPING
+			state = PlayerState.JUMP_STARTED
 		else:
-			state = PlayerState.FALLING
-	
+			if is_zero_approx(velocity.x):
+				state = PlayerState.IDLE
+			else:
+				state = PlayerState.WALKING
+	else:
+		if velocity.y > 0.0:
+			if Input.is_action_just_pressed("jump"):
+				state = PlayerState.DOUBLE_JUMPING
+			else:
+				state = PlayerState.FALLING
+		else:
+			state = PlayerState.JUMPING
+
 	# Process State
 	match state:
 		PlayerState.IDLE:
@@ -105,14 +107,14 @@ func handle_movement_state():
 		PlayerState.JUMP_STARTED:
 			player_sprite.play("jump_start")
 			jump_count += 1
-			velocity.y -= jump_strength
+			velocity.y = -jump_strength
 		PlayerState.JUMPING:
 			pass	# Handled in _on_animated_sprite_2d_animation_finished
 		PlayerState.DOUBLE_JUMPING:
 			jump_count += 1
 			if jump_count <= max_jumps:
 				player_sprite.play("double_jump_start")
-				velocity.y -= jump_strength
+				velocity.y = -jump_strength
 		PlayerState.FALLING:
 			player_sprite.play("fall")
 	
