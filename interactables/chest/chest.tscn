@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://crkm2wlksc6vr"]
+[gd_scene load_steps=9 format=3 uid="uid://crkm2wlksc6vr"]
 
 [ext_resource type="Script" path="res://interactables/chest/chest.gd" id="1_do8e7"]
+[ext_resource type="PackedScene" uid="uid://bf1hcx1d4igr3" path="res://interactables/key_door/key.tscn" id="2_b4bbn"]
 [ext_resource type="Texture2D" uid="uid://bb74mmf3rdg4r" path="res://art/objects/Chest_01_Locked.png" id="2_ythxh"]
 [ext_resource type="Texture2D" uid="uid://ctvthkqtgqmgm" path="res://art/objects/Chest_01_Unlocked.png" id="3_edx10"]
 [ext_resource type="PackedScene" uid="uid://1mr2rwbyq6oq" path="res://interactables/interactable.tscn" id="4_6djwv"]
@@ -16,10 +17,12 @@ properties/0/path = NodePath(".:is_locked")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Chest" type="Node2D" node_paths=PackedStringArray("chest_locked", "chest_unlocked")]
+[node name="Chest" type="Node2D" node_paths=PackedStringArray("chest_locked", "chest_unlocked", "key_spawn")]
 script = ExtResource("1_do8e7")
 chest_locked = NodePath("ChestLocked")
 chest_unlocked = NodePath("ChestUnlocked")
+key_scene = ExtResource("2_b4bbn")
+key_spawn = NodePath("KeySpawn")
 
 [node name="ChestLocked" type="Sprite2D" parent="."]
 position = Vector2(3, -29)
@@ -45,8 +48,16 @@ collision_mask = 0
 position = Vector2(2.08165e-12, -21.5)
 shape = SubResource("RectangleShape2D_51ied")
 
+[node name="KeySpawn" type="Node2D" parent="."]
+position = Vector2(0, -21)
+
 [node name="ChestSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_2lq4t")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://interactables/key_door/key.tscn")
+spawn_path = NodePath("../KeySpawn")
+spawn_limit = 1
 
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
 [connection signal="delta_synchronized" from="ChestSynchronizer" to="." method="_on_chest_synchronizer_delta_synchronized"]
