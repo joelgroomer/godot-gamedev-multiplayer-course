@@ -8,8 +8,10 @@ var following_body
 func _on_area_2d_body_entered(body):
 	following_body = body
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if multiplayer.multiplayer_peer == null:
+		return
+		
 	if multiplayer.is_server() && following_body != null:
 		global_position = lerp(
 			following_body.global_position + follow_offset,
