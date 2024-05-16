@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://du1y6t7b61lna"]
+[gd_scene load_steps=74 format=3 uid="uid://du1y6t7b61lna"]
 
 [ext_resource type="Texture2D" uid="uid://cln1ubxiy43oh" path="res://art/characters/elf/double_jump_start/0_Dark_Elves_Double Jump_000.png" id="1_8f08q"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_os5ah"]
@@ -68,6 +68,7 @@
 [ext_resource type="Texture2D" uid="uid://bbthkjqiq33il" path="res://art/characters/elf/walk/0_Dark_Elves_Walking_021.png" id="64_a8nie"]
 [ext_resource type="Texture2D" uid="uid://b771rxse6n114" path="res://art/characters/elf/walk/0_Dark_Elves_Walking_022.png" id="65_abkgc"]
 [ext_resource type="Texture2D" uid="uid://c2r31n6lj0pks" path="res://art/characters/elf/walk/0_Dark_Elves_Walking_023.png" id="66_j28mg"]
+[ext_resource type="PackedScene" uid="uid://dioexxkxbevkc" path="res://player/player_finder.tscn" id="69_jpqs3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_punm5"]
 size = Vector2(42, 56)
@@ -317,12 +318,13 @@ properties/2/path = NodePath("AnimatedSprite2D:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite", "player_finder")]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 19
 script = ExtResource("1_os5ah")
 player_camera = ExtResource("2_4uicy")
 player_sprite = NodePath("AnimatedSprite2D")
+player_finder = NodePath("PlayerFinder")
 max_jumps = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -347,6 +349,14 @@ shape = SubResource("RectangleShape2D_guhyc")
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_tg15s")
 
+[node name="PlayerFinder" parent="." instance=ExtResource("69_jpqs3")]
+visible = false
+position = Vector2(2.08165e-12, -26)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="AnimatedSprite2D/InteractionHandler" to="." method="_on_interaction_handler_area_entered"]
 [connection signal="area_exited" from="AnimatedSprite2D/InteractionHandler" to="." method="_on_interaction_handler_area_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

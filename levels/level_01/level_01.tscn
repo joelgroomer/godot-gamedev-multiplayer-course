@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://naim6jwvxko8"]
+[gd_scene load_steps=14 format=3 uid="uid://naim6jwvxko8"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_3b6ng"]
 [ext_resource type="PackedScene" uid="uid://du1y6t7b61lna" path="res://player/player.tscn" id="1_najoe"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://crkm2wlksc6vr" path="res://interactables/chest/chest.tscn" id="8_713pk"]
 [ext_resource type="PackedScene" uid="uid://b70cn5bkbj4as" path="res://interactables/key_door/key_door.tscn" id="9_pec0b"]
 [ext_resource type="PackedScene" uid="uid://dq26qr733a8bc" path="res://interactables/bridge/bridge.tscn" id="10_2txv6"]
+[ext_resource type="PackedScene" uid="uid://b0rbnlt2qtf6w" path="res://interactables/pushable_objects/pushable_crate.tscn" id="11_sxr7y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yyhww"]
 texture = ExtResource("2_d1m5r")
@@ -112,7 +113,7 @@ centered = false
 position = Vector2(-1244, -67)
 
 [node name="Door" parent="----- Interactables -----" instance=ExtResource("7_le7ps")]
-position = Vector2(-837, 129)
+position = Vector2(-888, 129)
 
 [node name="Chest" parent="----- Interactables -----" instance=ExtResource("8_713pk")]
 position = Vector2(-1329, 128)
@@ -129,6 +130,9 @@ position = Vector2(1740, 129)
 
 [node name="Bridge" parent="----- Interactables -----" instance=ExtResource("10_2txv6")]
 position = Vector2(1351, -223)
+
+[node name="PushableCrate" parent="----- Interactables -----" instance=ExtResource("11_sxr7y")]
+position = Vector2(530, -158)
 
 [node name="----- Players -----" type="Node" parent="."]
 
