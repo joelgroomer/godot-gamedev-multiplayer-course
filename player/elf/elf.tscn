@@ -5,7 +5,7 @@
 
 [node name="Elf" instance=ExtResource("1_dnmkn")]
 move_speed = 350
-push_force = 5
+push_force = 7
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = ExtResource("2_dytra")

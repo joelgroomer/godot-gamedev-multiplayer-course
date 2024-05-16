@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://naim6jwvxko8"]
+[gd_scene load_steps=15 format=3 uid="uid://naim6jwvxko8"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_3b6ng"]
-[ext_resource type="PackedScene" uid="uid://du1y6t7b61lna" path="res://player/player.tscn" id="1_najoe"]
+[ext_resource type="PackedScene" uid="uid://docjartr0j55q" path="res://player/elf/elf.tscn" id="2_8iyql"]
 [ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://art/platforms/Platformer_spritesheet.png" id="2_d1m5r"]
+[ext_resource type="PackedScene" uid="uid://bximk0h662e6u" path="res://player/knight/knight.tscn" id="3_2d58q"]
 [ext_resource type="Texture2D" uid="uid://bja0wl8tcw71c" path="res://art/backgrounds/background_01.png" id="3_3sfhy"]
 [ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://art/backgrounds/background_02.png" id="4_w2nb1"]
 [ext_resource type="PackedScene" uid="uid://ddt811gjie62e" path="res://interactables/pressure_plate/pressure_plate.tscn" id="6_0al7l"]
@@ -74,11 +75,12 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_yyhww")
 
-[node name="Level_01" type="Node2D" node_paths=PackedStringArray("players_container", "spawn_points")]
+[node name="Level_01" type="Node2D" node_paths=PackedStringArray("players_container", "spawn_points", "key_door")]
 script = ExtResource("1_3b6ng")
 players_container = NodePath("----- Players -----/PlayersContainer")
-player_scene = ExtResource("1_najoe")
+player_scenes = Array[PackedScene]([ExtResource("2_8iyql"), ExtResource("3_2d58q")])
 spawn_points = [NodePath("----- Players -----/SpawnPoint_0"), NodePath("----- Players -----/SpawnPoint_1")]
+key_door = NodePath("----- Interactables -----/KeyDoor")
 
 [node name="----- Environment -----" type="Node" parent="."]
 
@@ -120,7 +122,7 @@ position = Vector2(-1329, 128)
 scale = Vector2(-1, 1)
 
 [node name="KeyDoor" parent="----- Interactables -----" instance=ExtResource("9_pec0b")]
-position = Vector2(1777, -186)
+position = Vector2(1802, -187)
 
 [node name="BridgePlate_01" parent="----- Interactables -----" instance=ExtResource("6_0al7l")]
 position = Vector2(1587, 129)
@@ -132,14 +134,14 @@ position = Vector2(1740, 129)
 position = Vector2(1351, -223)
 
 [node name="PushableCrate" parent="----- Interactables -----" instance=ExtResource("11_sxr7y")]
-position = Vector2(530, -158)
+position = Vector2(530, -157)
 
 [node name="----- Players -----" type="Node" parent="."]
 
 [node name="PlayersContainer" type="Node2D" parent="----- Players -----"]
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="----- Players -----"]
-_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+_spawnable_scenes = PackedStringArray("res://player/elf/elf.tscn", "res://player/knight/knight.tscn")
 spawn_path = NodePath("../PlayersContainer")
 spawn_limit = 2
 
@@ -150,5 +152,6 @@ position = Vector2(130, 126)
 position = Vector2(284, 127)
 
 [connection signal="toggle" from="----- Interactables -----/DoorPlate" to="----- Interactables -----/Door" method="activate"]
+[connection signal="all_players_finished" from="----- Interactables -----/KeyDoor" to="." method="_on_key_door_all_players_finished"]
 [connection signal="toggle" from="----- Interactables -----/BridgePlate_01" to="----- Interactables -----/Bridge" method="activate"]
 [connection signal="toggle" from="----- Interactables -----/BridgePlate_02" to="----- Interactables -----/Bridge" method="activate"]
